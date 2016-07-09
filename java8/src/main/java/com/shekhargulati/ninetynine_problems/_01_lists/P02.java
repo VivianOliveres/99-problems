@@ -7,20 +7,26 @@ import java.util.NoSuchElementException;
 public class P02 {
 
     public static <T> T secondLast(List<T> list) {
-        if (list.size() < 2) {
-            throw new NoSuchElementException("Can't find secondLast element from a list with less than 2 elements");
+        if (list == null || list.isEmpty() || list.size() == 1) {
+            throw new NoSuchElementException("Invalid list : " + list);
         }
-        return list.get(list.size() - 2);
+
+        int lastIndex = list.size() - 2;
+        return list.get(lastIndex);
     }
 
     public static <T> T secondLastRecursion(LinkedList<T> list) {
-        if (list.size() < 2) {
-            throw new NoSuchElementException("Can't find secondLast element from a list with less than 2 elements");
+        if (list == null || list.isEmpty() || list.size() == 1) {
+            throw new NoSuchElementException("Invalid list : " + list);
         }
-        if (list.size() == 2) {
-            return list.getFirst();
-        }
-        return secondLastRecursion(new LinkedList<>(list.subList(1, list.size())));
 
+        if (list.size() == 2) {
+            return list.get(0);
+        }
+
+        int lastIndex = list.size();
+        List<T> subList = list.subList(1, lastIndex);
+        LinkedList<T> subLinkedList = new LinkedList<>(subList);
+        return secondLastRecursion(subLinkedList);
     }
 }
