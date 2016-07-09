@@ -1,9 +1,8 @@
 package com.shekhargulati.ninetynine_problems._01_lists;
 
-import java.util.AbstractMap.SimpleEntry;
+import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 /**
  * <b>(*) Modified run-length encoding</b>
@@ -14,11 +13,18 @@ import static java.util.stream.Collectors.toList;
 public class P11 {
 
     public static <T> List<Object> encode_modified(List<T> list) {
-        return P09.pack(list).stream().map(l -> {
-            if (l.size() == 1) {
-                return l.get(0);
+        List<Object> result = new ArrayList<>();
+        List<List<T>> pack = P09.pack(list);
+        for (List<T> element : pack) {
+            if (element.size() == 1) {
+                result.add(element.get(0));
+
+            } else {
+                AbstractMap.SimpleEntry<Integer, T> entry = new AbstractMap.SimpleEntry<>(element.size(), element.get(0));
+                result.add(entry);
             }
-            return new SimpleEntry<>(l.size(), l.get(0));
-        }).collect(toList());
+        }
+
+        return result;
     }
 }
