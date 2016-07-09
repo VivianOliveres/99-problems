@@ -1,10 +1,8 @@
 package com.shekhargulati.ninetynine_problems._01_lists;
 
 import java.util.*;
-import java.util.stream.IntStream;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
-import static java.util.stream.Collectors.toList;
 
 /**
  * Reverse a list
@@ -13,37 +11,34 @@ public class P05 {
 
     public static <T> List<T> reverse(List<T> list) {
         if (list == null) {
-            throw new IllegalArgumentException("list can't be null");
+            return null;
         }
+
         Collections.reverse(list);
         return list;
     }
 
     public static <T> List<T> reverse_foreach(List<T> list) {
         if (list == null) {
-            throw new IllegalArgumentException("list can't be null");
+            return null;
         }
-        List<T> reversed = new ArrayList<>();
+
+        List<T> result = new ArrayList<>(list.size());
         for (int i = list.size() - 1; i >= 0; i--) {
-            reversed.add(list.get(i));
+            T element = list.get(i);
+            result.add(element);
         }
-        return reversed;
+
+        return result;
     }
 
-
-    public static <T> List<T> reverse_IntStream(List<T> list) {
-        if (list == null) {
-            throw new IllegalArgumentException("list can't be null");
-        }
-        int size = list.size();
-        return IntStream.iterate(size - 1, el -> el - 1).limit(size).mapToObj(list::get).collect(toList());
+    public static List<Integer> reverse_IntStream(List<Integer> list) {
+        return list.stream().collect(() -> new ArrayList<>(), (l, i) -> l.add(0, i), (l1, l2) -> l2.addAll(l1));
     }
 
     public static <T> List<T> reverse_customStream(ArrayDeque<T> list) {
-        if (list == null) {
-            throw new IllegalArgumentException("list can't be null");
-        }
-        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(list.descendingIterator(), Spliterator.ORDERED), false).collect(toList());
+        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(list.descendingIterator(), Spliterator.ORDERED), false)
+                .collect(Collectors.toList());
     }
 }
 

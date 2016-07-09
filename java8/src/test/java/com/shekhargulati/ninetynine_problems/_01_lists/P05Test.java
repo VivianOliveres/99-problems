@@ -20,6 +20,12 @@ public class P05Test {
     }
 
     @Test
+    public void shouldReverseAList_ForEach() throws Exception {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        assertThat(P05.reverse_foreach(numbers), is(equalTo(Arrays.asList(5, 4, 3, 2, 1))));
+    }
+
+    @Test
     public void shouldReverseAList_IntStream() throws Exception {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
         assertThat(P05.reverse_IntStream(numbers), is(equalTo(Arrays.asList(5, 4, 3, 2, 1))));
