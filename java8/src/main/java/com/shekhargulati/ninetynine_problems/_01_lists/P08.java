@@ -2,7 +2,6 @@ package com.shekhargulati.ninetynine_problems._01_lists;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * <b>(**) Eliminate consecutive duplicates of list elements</b>
@@ -17,15 +16,31 @@ import java.util.Objects;
 public class P08 {
 
     public static <T> List<T> compress(List<T> list) {
-        Objects.requireNonNull(list, "Please make sure list is not null");
         List<T> result = new ArrayList<>();
         T lastElement = null;
-        for (T e : list) {
-            if (!Objects.equals(lastElement, e)) {
-                result.add(e);
+        for (T element : list) {
+            if (lastElement == null) {
+                lastElement = element;
+                result.add(element);
+                continue;
             }
-            lastElement = e;
+
+            if (lastElement.equals(element)) {
+                continue;
+            }
+
+            lastElement = element;
+            result.add(element);
         }
+
+        return result;
+    }
+
+    public static <T> List<T> compress_Stream(List<T> list) {
+        List<T> result = new ArrayList<>();
+        list.stream()
+                .filter(e -> result.isEmpty() || result.get(result.size() - 1) != e)
+                .forEach(e -> result.add(e));
         return result;
     }
 

@@ -24,4 +24,18 @@ public class P08Test {
         assertThat(compressedList, hasSize(6));
         assertThat(compressedList, contains("a", "b", "c", "a", "d", "e"));
     }
+
+    @Test
+    public void shouldRemoveConsecutiveDuplicatesInAList_Stream() throws Exception {
+        List<String> compressedList = P08.compress_Stream(asList("a", "a", "a", "a", "b", "c", "c", "d", "e", "e", "e", "e"));
+        assertThat(compressedList, hasSize(5));
+        assertThat(compressedList, contains("a", "b", "c", "d", "e"));
+    }
+
+    @Test
+    public void shouldNotRemoveNonConsecutiveSimilarElementsFromAList_Stream() throws Exception {
+        List<String> compressedList = P08.compress_Stream(asList("a", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e", "e"));
+        assertThat(compressedList, hasSize(6));
+        assertThat(compressedList, contains("a", "b", "c", "a", "d", "e"));
+    }
 }
