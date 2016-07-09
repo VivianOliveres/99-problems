@@ -13,9 +13,7 @@ public class P09Test {
 
     @Test
     public void shouldReturnAListWithTwoListElementsWhenAListWithTwoUniqueElementsIsPassed() throws Exception {
-
         List<List<String>> packedList = P09.pack(Arrays.asList("a", "b"));
-
         assertThat(packedList, hasSize(2));
         assertThat(packedList.get(0), contains("a"));
         assertThat(packedList.get(1), contains("b"));

@@ -19,18 +19,22 @@ public class P09 {
     Simple approach using for-each loop
      */
     public static <T> List<List<T>> pack(List<T> list) {
+        List<List<T>> result = new ArrayList<>();
         T lastElement = null;
-        List<List<T>> packedList = new ArrayList<>();
-        List<T> elements = new ArrayList<>();
-        for (T el : list) {
-            if (!Objects.equals(lastElement, el)) {
-                elements = new ArrayList<>();
-                packedList.add(elements);
+        List<T> lastList = null;
+        for (T element : list) {
+            if (!Objects.equals(lastElement, element)) {
+                lastElement = element;
+                lastList = new ArrayList<>();
+                lastList.add(element);
+                result.add(lastList);
+                continue;
             }
-            elements.add(el);
-            lastElement = el;
+
+            lastList.add(element);
         }
-        return packedList;
+
+        return result;
     }
 
 
