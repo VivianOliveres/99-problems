@@ -23,6 +23,17 @@ public class P04Test {
     }
 
     @Test
+    public void streamOfEmptyListShouldBe0() throws Exception {
+        long length = P04.lengthStream(Collections.emptyList());
+        assertThat(length, is(equalTo(0L)));
+    }
+
+    @Test
+    public void shouldFindStreamOfNonEmptyList() throws Exception {
+        assertThat(P04.lengthStream(Arrays.asList(1, 2, 3, 4, 5)), is(equalTo(5L)));
+    }
+
+    @Test
     public void listOfEmptyListShouldBe0_Recursive() throws Exception {
         int length = P04.lengthRecursive(Collections.emptyList());
         assertThat(length, is(equalTo(0)));

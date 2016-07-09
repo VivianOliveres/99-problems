@@ -15,18 +15,16 @@ public class P04 {
         return list.stream().count();
     }
 
-    public static <T> long lengthStream1(List<T> list) {
-        return list.stream().mapToInt(x -> 1).sum();
-    }
-
     public static <T> int lengthRecursive(List<T> list) {
         return _lengthRecursive(list, 0);
     }
 
     private static <T> int _lengthRecursive(List<T> list, int i) {
-        if (list.isEmpty()) {
+        if (list == null || list.isEmpty()) {
             return i;
         }
-        return _lengthRecursive(list.subList(1, list.size()), ++i);
+
+        List<T> subList = list.subList(1, list.size());
+        return _lengthRecursive(subList, ++i);
     }
 }
