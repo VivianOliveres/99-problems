@@ -8,10 +8,26 @@ import java.util.List;
 public class P06 {
 
     public static <T> boolean isPalindrome(List<T> list) {
-        return false;
+        for (int i = 0, j = list.size() - 1; i <= j; i++, j--) {
+            T first = list.get(i);
+            T second = list.get(j);
+            if (first == null && second == null) {
+                continue;
+
+            } else if (first == null || second == null || !first.equals(second)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
-    public static <T> boolean isPalindrome_IntStream(List<T> list) {
+    public static <T> boolean isPalindrome_Reverse(List<T> list) {
+        List<T> reversedList = P05.reverse_foreach(list);
+        return list.equals(reversedList);
+    }
+
+    public static <T> boolean isPalindrome_Stream(List<T> list) {
         return false;
     }
 
