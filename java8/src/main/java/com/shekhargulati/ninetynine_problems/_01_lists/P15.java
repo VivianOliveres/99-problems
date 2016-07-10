@@ -3,8 +3,7 @@ package com.shekhargulati.ninetynine_problems._01_lists;
 
 import java.util.Collections;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
+import java.util.stream.Collectors;
 
 /**
  * (**) Duplicate the elements of a list a given number of times.
@@ -15,6 +14,6 @@ import static java.util.stream.Collectors.toList;
 public class P15 {
 
     public static <T> List<T> duplicate(final List<T> list, final int times) {
-        return list.stream().flatMap(e -> Collections.nCopies(times, e).stream()).collect(toList());
+        return list.stream().flatMap(e -> Collections.nCopies(times, e).stream()).collect(Collectors.toList());
     }
 }
